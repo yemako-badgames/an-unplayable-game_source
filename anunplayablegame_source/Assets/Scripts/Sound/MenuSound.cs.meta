@@ -1,0 +1,13 @@
+fileFormatVersion: 2
+guid: a8cdc4474821e004d83746799d7b61b7
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - hoverSound: {fileID: 8300000, guid: 7b47c41f626b334438786348b1bf100d, type: 3}
+  - pressedSound: {fileID: 8300000, guid: f23282a875b24014b989f5ac953c5eb1, type: 3}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
