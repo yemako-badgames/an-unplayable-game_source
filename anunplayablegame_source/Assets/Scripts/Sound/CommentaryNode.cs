@@ -8,6 +8,7 @@ public class CommentaryNode : MonoBehaviour
     [Space]
     [SerializeField] bool includeInDemo = false;
     [SerializeField] bool excludeInFullGame = false;
+    [SerializeField] bool excludeOnSteam = false;
 
     CommentaryController commentaryPlayer;
 
@@ -26,18 +27,26 @@ public class CommentaryNode : MonoBehaviour
     private void OnEnable()
     {
         
-        if (Demo.Instance != null)
+        if (GameVersion.Instance != null)
         {
             // if this is the demo build, and this node should NOT be included in the demo,
             // disable this node
-            if (Demo.Instance.isDemo && !includeInDemo)
+            if (GameVersion.Instance.isDemo && !includeInDemo)
             {
                 gameObject.SetActive(false);
                 return;
             }
             // if this is the full game and this node should NOT be included in the full game,
             // disable this node
-            else if (!Demo.Instance.isDemo && excludeInFullGame)
+            else if (!GameVersion.Instance.isDemo && excludeInFullGame)
+            {
+                gameObject.SetActive(false);
+                return;
+            }
+
+            // if this is the steam version and this node should NOT be included on steam,
+            // disable this node
+            if (GameVersion.Instance.isSteam && excludeOnSteam)
             {
                 gameObject.SetActive(false);
                 return;
