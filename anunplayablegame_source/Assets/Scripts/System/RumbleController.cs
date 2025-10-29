@@ -21,6 +21,9 @@ public class RumbleController : MonoBehaviour
     /// </summary>
     public void StartRumble()
     {
+        // do nothing if vibration is disabled
+        if (!Settings.Instance.vibrationOn) { return; }
+
         // do nothing if player is not using controller cursor
         if (Cursor.visible) { return; }
 

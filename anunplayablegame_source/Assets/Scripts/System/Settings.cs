@@ -19,6 +19,8 @@ public class Settings : MonoBehaviour
     [Space]
     [SerializeField] float volumeChangeMult = 2;
 
+    public bool vibrationOn { get; private set; } = true;
+
 
     public static Settings Instance;
 
@@ -34,7 +36,16 @@ public class Settings : MonoBehaviour
         if (PlayerPrefs.HasKey("SFXVolume")) { sfxVolume = PlayerPrefs.GetFloat("SFXVolume"); }
         if (PlayerPrefs.HasKey("CommentaryVolume")) { commentaryVolume = PlayerPrefs.GetFloat("CommentaryVolume"); }
 
-
+        // initialize controller vibration setting if it has been changed in the past
+        if (PlayerPrefs.HasKey("Vibration")) 
+        { 
+            // convert int to bool
+            if (PlayerPrefs.GetInt("Vibration") == 1)
+            {
+                vibrationOn = true;
+            }
+            else { vibrationOn = false; }
+        }
 
         // fetch pre-existing window size settings (if they exist)
         if (PlayerPrefs.HasKey("WindowWidth") && PlayerPrefs.HasKey("WindowHeight")) 
@@ -184,4 +195,16 @@ public class Settings : MonoBehaviour
         PlayerPrefs.SetInt("WindowWidth", windowWidth);
         PlayerPrefs.SetInt("WindowHeight", windowHeight);
     }
+
+    public void SetVibration(bool newVibrationSetting)
+    {
+        vibrationOn = newVibrationSetting;
+
+        if (vibrationOn)
+        {
+            PlayerPrefs.SetInt("Vibration", 1);
+        }
+        else { PlayerPrefs.SetInt("Vibration", 0); }
+    }
+
 }
